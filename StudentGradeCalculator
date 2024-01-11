@@ -1,0 +1,109 @@
+import java.util.Scanner;
+
+public class practice {
+    public static void main(String[] args) {
+
+        try (Scanner ob = new Scanner(System.in)) {
+
+            String[] sub = { "DBMS", "DSA", "SP", "SQL", "REACTJS" };
+
+            int totalsubs = sub.length;
+
+            double[] marks = new double[totalsubs];
+
+            double marksObtained = 0;
+
+            for (int i = 0; i < totalsubs; i++) {
+                System.out.print("Enter marks of " + sub[i] + ": ");
+                while (!ob.hasNextDouble()) {
+                    System.out.println("INVALID INPUT, Please to enter valid input, such as numeric values only.");
+                    ob.next();
+                }
+                marks[i] = ob.nextDouble();
+                marksObtained += marks[i];
+            }
+            double totalMarks = totalsubs * 100;
+            double percentage = (marksObtained / totalMarks) * 100;
+            double CGPA = calculate(percentage);
+            double averagePercent = percentage / totalsubs;
+            System.out.println("\nresult");
+            for (int i = 0; i < totalsubs; i++) {
+                
+                char grade = getGrade(marks[i]);
+                System.out.println(
+                        sub[i] + ": " + marks[i] + "\n Grade: " + grade);
+            }
+            System.out.println("\nTotal marks: " + marksObtained + " / " + totalMarks);
+            System.out.println("Overall percentage: " + percentage + " % ");
+            System.out.println("average percentage: " + averagePercent + " % ");
+            System.out.println("Total CGPA: " + CGPA + " ");
+            char overallGrade = getOverallGrade(percentage);
+            System.out.println("Overall grade: " + overallGrade);
+
+        }
+    }
+
+  
+
+    private static double calculate(double percentage) {
+        if (percentage >= 90)
+            return 9.0;
+        else if (percentage >= 80)
+            return 8.0;
+        else if (percentage >= 70)
+            return 7.0;
+        else if (percentage >= 60)
+            return 6.0;
+        else if (percentage >= 50)
+            return 5.0;
+        else if (percentage >= 40)
+            return 4.0;
+        else {
+            return 3.5;
+        }
+    }
+
+    private static char getGrade(double marks) {
+        if (marks >= 90)
+            return 'A';
+        else if (marks >= 80)
+            return 'B';
+        else if (marks >= 70)
+            return 'C';
+        else if (marks >= 60)
+            return 'D';
+        else if (marks >= 50)
+            return 'E';
+        else if (marks >= 33)
+            return 'F';
+        else {
+            System.out.print("You Failed in: ");
+            return 'G';
+        }
+    }
+
+    private static char getOverallGrade(double overallPercentage) {
+        if (overallPercentage >= 90) {
+            System.out.println("Excellent, Keep It UP!!!");
+            return 'A';
+        } else if (overallPercentage >= 80) {
+            System.out.println("Great, work Harder");
+            return 'B';
+        } else if (overallPercentage >= 70) {
+            System.out.println("Could have done much better.");
+            return 'C';
+        } else if (overallPercentage >= 60) {
+            System.out.println("Good");
+            return 'D';
+        } else if (overallPercentage >= 50) {
+            System.out.println("AVERAGE");
+            return 'E';
+        } else if (overallPercentage >= 40) {
+            System.out.println("PROMOTED");
+            return 'F';
+        } else {
+            System.out.println("FAIL");
+            return 'G';
+        }
+    }
+}
